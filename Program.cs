@@ -7,6 +7,7 @@ internal class Program
         string check;
         int first_number;
         int second_number;
+        int result;
         string logic_operator;
 
         while(true)
@@ -33,20 +34,55 @@ internal class Program
 
             switch(logic_operator[0])
             {
-                case '+':
-                    Console.WriteLine("Result\n{0} + {1} = {2}", first_number, second_number, first_number+second_number );
+                case '&':
+                    result = first_number & second_number;
+
+                    Console.WriteLine("(Decimal) {0} & {1} = {2}", first_number, second_number, result);
+
+                    Console.WriteLine("(Binary) {0} & {1} = {2}", 
+                    Convert.ToString(first_number, 2), 
+                    Convert.ToString(second_number, 2), 
+                    Convert.ToString(result, 2)); 
+
+                    Console.WriteLine("(Hexadecimal) {0} & {1} = {2}", 
+                    Convert.ToString(first_number, 16), 
+                    Convert.ToString(second_number, 16), 
+                    Convert.ToString(result, 16));
+
                     break;
 
-                case '-':
-                    Console.WriteLine("Result\n{0} - {1} = {2}", first_number, second_number, first_number-second_number );
+                case '|':
+                    result = first_number | second_number;
+                    
+                    Console.WriteLine("(Decimal) {0} | {1} = {2}", first_number, second_number, result);
+
+                    Console.WriteLine("(Binary) {0} | {1} = {2}", 
+                    Convert.ToString(first_number, 2), 
+                    Convert.ToString(second_number, 2), 
+                    Convert.ToString(result, 2)); 
+
+                    Console.WriteLine("(Hexadecimal) {0} | {1} = {2}", 
+                    Convert.ToString(first_number, 16), 
+                    Convert.ToString(second_number, 16), 
+                    Convert.ToString(result, 16));
+
                     break;
 
-                case '*':
-                    Console.WriteLine("Result\n{0} * {1} = {2}", first_number, second_number, first_number*second_number );
-                    break;
+                case '^':
+                    result = first_number ^ second_number;
+                    
+                    Console.WriteLine("(Decimal) {0} ^ {1} = {2}", first_number, second_number, result);
 
-                case '/':
-                    Console.WriteLine("Result\n{0} / {1} = {2}", first_number, second_number, first_number/second_number );
+                    Console.WriteLine("(Binary) {0} ^ {1} = {2}", 
+                    Convert.ToString(first_number, 2), 
+                    Convert.ToString(second_number, 2), 
+                    Convert.ToString(result, 2)); 
+
+                    Console.WriteLine("(Hexadecimal) {0} ^ {1} = {2}", 
+                    Convert.ToString(first_number, 16), 
+                    Convert.ToString(second_number, 16), 
+                    Convert.ToString(result, 16));
+
                     break;
 
                 default:
