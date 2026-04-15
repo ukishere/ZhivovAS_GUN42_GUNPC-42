@@ -1,55 +1,65 @@
-﻿using System.Formats.Asn1;
-using System.IO.Pipelines;
-
-internal class Program
+﻿namespace Classes
 {
-    private static void Main(string[] args)
+    public class Unit
     {
-        //Task 1
-        Console.WriteLine("Task 1");
-        int[] a = new int[10]; 
-        for(int i = 2; i < a.Length; i++)
+        private readonly string  Name;
+        private float Health = 100;
+        private readonly int Damage = 5;
+        private readonly float Armor = 0.6f;
+
+        public Unit (string name) 
         {
-            if (i == 2)
+            Name = name; 
+        }
+        public Unit () : this ("Unknown unit") {}
+        
+        public float GetRealHealth()
+        {
+            return Health * (1f + Armor);
+        }
+
+        public bool SetDamage(int damage)
+        {
+            Health = Health - damage * Armor;
+
+            if (Health <= 0)
             {
-                a[0] = 0;
-                a[1] = 1;
-                Console.Write("{0} {1} ", a[0], a[1]);
-            }
-            a[i] = a[i-1] + a[i-2];    
-            Console.Write("{0} ", a[i]);
+                Health = 0;
+                return true;
+            }     
+            else 
+                return false;
         }
 
-        //Task 2
-        Console.WriteLine("\nTask 2");
-        for(int i = 2; i <=20; i++)
+        public void Display()
         {
-            if(i % 2 != 1)
-            {
-                Console.Write("{0} ", i);
-            }
+            Console.WriteLine($"Name: {Name}; Health: {Health}; Damage: {Damage}; Armor: {Armor}.");
         }
-
-        //Task 3
-        Console.WriteLine("\nTask 3");
-        for(int i = 1; i <= 5; i++)
-        {
-            for(int j = 1; j <= 5; j++)
-            {
-                Console.WriteLine("{0} * {1} = {2}", i, j, i*j);
-            }
-        }
-
-        //Task 4
-        Console.WriteLine("Task 4\nGuess the password:");
-
-        string password = "qwerty";
-        string attempt;
-        do
-        {
-            attempt = Console.ReadLine();
-        }
-        while(password != attempt);
     }
+    internal class Program
+    {
+        private static void Main(string[] args)
+        {
+            Unit a = new Unit();
+            Console.WriteLine("Created blank unit");
+            a.Display();
 
+            Unit b = new Unit("Named unit");
+            Console.WriteLine("\nCreated named unit");
+            b.Display();
+
+            Console.WriteLine("\nChecking his real health");
+            Console.WriteLine($"Real health: {b.GetRealHealth()}");
+
+            Console.WriteLine("\nGiving him 10 damage");
+            bool check = b.SetDamage(10);
+            Console.WriteLine($"Real health: {b.GetRealHealth()}");
+            Console.WriteLine($"Unit alive: {!check}");
+
+            Console.WriteLine("\nGiving him 200 damage");
+            check = b.SetDamage(200);
+            Console.WriteLine($"Real health: {b.GetRealHealth()}");
+            Console.WriteLine($"Unit alive: {!check}");
+        }
+    }
 }
