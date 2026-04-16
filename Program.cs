@@ -2,16 +2,33 @@
 {
     public class Unit
     {
-        private readonly string  Name;
-        private float Health = 100;
-        private readonly int Damage = 5;
-        private readonly float Armor = 0.6f;
+        private string _name;
+        private float _health;
 
-        public Unit (string name) 
-        {
-            Name = name; 
-        }
+        public Unit (string input) { Name = input; Health = 100; }
         public Unit () : this ("Unknown unit") {}
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+
+        public float Health
+        {
+            get { return _health; }
+            set { _health = value; }
+        }
+
+        public int Damage
+        {
+            get { return 5; }
+        }
+
+        public float Armor
+        {
+            get { return 0.6f; }
+        }
         
         public float GetRealHealth()
         {
@@ -33,7 +50,7 @@
 
         public void Display()
         {
-            Console.WriteLine($"Name: {Name}; Health: {Health}; Damage: {Damage}; Armor: {Armor}.");
+            Console.WriteLine($"Name: {_name}; Health: {Health}; Damage: {Damage}; Armor: {Armor}.");
         }
     }
     internal class Program
